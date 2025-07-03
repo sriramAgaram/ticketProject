@@ -10,10 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title = 'frontend';
 
-  ngOnInit() {
-    console.log('AppComponent loaded!');
-  }
+  
 }
