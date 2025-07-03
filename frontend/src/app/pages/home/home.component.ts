@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BarchartsComponent } from '../../components/barcharts/barcharts.component';
 import { PiechartComponent } from '../../components/piechart/piechart.component';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
+import { environment} from "../../../environments/environment";
 import { ChartData } from 'chart.js';
 import { sharedUi } from '../../shared/shared-ui';
 
