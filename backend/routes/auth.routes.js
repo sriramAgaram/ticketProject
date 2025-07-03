@@ -25,6 +25,8 @@ router.get("/profile", verifyToken, (req, res) => {
   });
 });
 
+
+
 router.get("/user", verifyToken, loggedUser);
 
 module.exports = router;
