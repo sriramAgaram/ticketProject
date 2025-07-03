@@ -1,0 +1,137 @@
+<div class="h-screen flex justify-center items-center">
+  <div
+    class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+  >
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <h5 class="text-xl font-medium text-gray-900 dark:text-white">
+        Sign up to our platform
+      </h5>
+      <div>
+        <label
+          for="name"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Your Name</label
+        >
+        <input
+          type="text"
+          id="name"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          placeholder="Enter Your Name"
+          required
+          formControlName="name"
+        />
+
+        <p
+          *ngIf="
+            signupForm.get('name')?.invalid && signupForm.get('name')?.touched
+          "
+          class="text-sm text-red-600 mt-1"
+        >
+          Name is required
+        </p>
+      </div>
+      <div>
+        <label
+          for="email"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Your email</label
+        >
+        <input
+          type="email"
+          id="email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          placeholder="ex:example@gmail.com"
+          required
+          formControlName="email"
+        />
+
+        <p
+          *ngIf="
+            signupForm.get('email')?.invalid && signupForm.get('email')?.touched
+          "
+          class="text-sm text-red-600 mt-1"
+        >
+          Email is Invalid !
+        </p>
+      </div>
+
+      <div>
+        <label
+          for="password"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Your password</label
+        >
+        <input
+          type="password"
+          id="password"
+          placeholder="••••••••"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+          formControlName="password"
+          minlength="6"
+        />
+
+        <p
+          *ngIf="
+            signupForm.get('password')?.invalid &&
+            signupForm.get('password')?.touched
+          "
+          class="text-sm text-red-600 mt-1"
+        >
+          Password is required
+        </p>
+      </div>
+
+      <div>
+        <label
+          for="role"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Select Your Role</label
+        >
+        <select
+          required
+          formControlName="role"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          id="role"
+        >
+          <option value="">Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+
+        <p
+          *ngIf="
+            signupForm.get('role')?.invalid && signupForm.get('role')?.touched
+          "
+          class="text-sm text-red-600 mt-1"
+        >
+          Please Select the Role
+        </p>
+      </div>
+      <div class="flex items-start">
+        <a
+          href="#"
+          class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
+          >Lost Password?</a
+        >
+      </div>
+      <button
+        [disabled]="signupForm.invalid"
+        [class.bg-blue-300]="signupForm.invalid"
+        [class.bg-blue-800]="signupForm.valid"
+        type="submit"
+        class="w-full text-white cursor-pointer hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      >
+        Sign up
+      </button>
+      <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+        Already Have an Account?
+        <a
+          routerLink="/login"
+          class="text-blue-700 hover:underline dark:text-blue-500"
+          >Login account</a
+        >
+      </div>
+    </form>
+  </div>
+</div>

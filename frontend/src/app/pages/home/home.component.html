@@ -1,0 +1,60 @@
+@if(loading){
+<app-spinner></app-spinner>
+}
+
+
+<section class="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-10 px-4">
+  <div class="max-w-7xl mx-auto space-y-10">
+
+    <!-- Title & Subtitle -->
+    <div class="text-center">
+      <h1 class="text-4xl font-extrabold text-gray-800 dark:text-white tracking-tight">
+        Ticket Analytics Dashboard
+      </h1>
+      <p class="text-gray-600 dark:text-gray-300 mt-2 text-lg">
+        Visual summary of current ticket activity
+      </p>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition hover:shadow-xl">
+        <h2 class="text-lg font-semibold text-center text-gray-700 dark:text-white mb-4">
+          Tickets by Status
+        </h2>
+        <app-barcharts [chartData]="barchartData"></app-barcharts>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition hover:shadow-xl">
+        <h2 class="text-lg font-semibold text-center text-gray-700 dark:text-white mb-4">
+          Tickets by Priority
+        </h2>
+        <app-piechart [pieData]="pieChartData"></app-piechart>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+        <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">
+          Total Tickets
+        </h3>
+        <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ totalTickets }}</p>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+        <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">
+          Pending Actions
+        </h3>
+        <p class="text-4xl font-bold text-yellow-500 dark:text-yellow-400">{{totalPending}}</p>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+        <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">
+          Updated Today
+        </h3>
+        <p class="text-4xl font-bold text-green-600 dark:text-green-400">{{totalTodayUpdated}}</p>
+      </div>
+    </div>
+  </div>
+</section>

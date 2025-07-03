@@ -1,0 +1,95 @@
+
+@if(loading){
+  <app-spinner></app-spinner>
+}
+
+<div class="h-screen flex justify-center items-center">
+  <div
+    class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+  >
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <h5 class="text-xl font-medium text-gray-900 dark:text-white">
+        Login to our platform
+      </h5>
+
+      <div>
+        <label
+          for="email"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Your email</label
+        >
+        <input
+          type="email"
+          id="email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          placeholder="ex:example@gmail.com"
+          required
+          formControlName="email"
+        />
+
+        <p
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+          class="text-sm text-red-600 mt-1"
+        >
+          Invalid Email!
+        </p>
+      </div>
+
+      <div>
+        <label
+          for="password"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Your password</label
+        >
+        <input
+          type="password"
+          id="password"
+          placeholder="••••••••"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+          formControlName="password"
+        />
+        <p
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+          class="text-sm text-red-600 mt-1"
+        >
+          Password is Required!
+        </p>
+      </div>
+
+      <div *ngIf="loginError" class="text-red-500 text-sm mt-2">
+        {{ loginError }}
+      </div>
+
+      <div class="flex items-start">
+        <a
+          href="#"
+          class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
+          >Lost Password?</a
+        >
+      </div>
+      <button
+        [disabled]="!loginForm.valid"
+        [class.bg-blue-300]="!loginForm.valid"
+        [class.bg-blue-700]="loginForm.valid"
+        type="submit"
+        class="w-full text-white hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      >
+        Login
+      </button>
+      <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+        Not Registered?
+        <a
+          routerLink="/signup"
+          class="text-blue-700 hover:underline dark:text-blue-500"
+          >Signup account</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
