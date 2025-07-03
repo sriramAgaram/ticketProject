@@ -1,34 +1,37 @@
 import pool from "../database/db.js";
-
 export const createTicketController = async (req, res) => {
   const { title, category, contactInfo, description } = req.body;
-  const query = `INSERT INTO tickets (authorId , title , description , category ,contactInfo , image ) VALUES (? , ? , ? , ? , ? , ?)`;
-
-  const image = req.file.filename;
   const authorId = req.user.id;
-  try {
-    const [result] = await pool
-      .promise()
-      .query(query, [
-        authorId,
-        title,
-        description,
-        category,
-        contactInfo,
-        image,
-      ]);
+  const image = req.file?.filename || null;
 
-    return res
-      .status(201)
-      .json({ success: true, message: "Ticket created Successfully", result });
+  try {
+    let query;
+    let values;
+
+    if (image) {
+      query = `INSERT INTO tickets (authorId, title, description, category, contactInfo, image) VALUES (?, ?, ?, ?, ?, ?)`;
+      values = [authorId, title, description, category, contactInfo, image];
+    } else {
+      query = `INSERT INTO tickets (authorId, title, description, category, contactInfo) VALUES (?, ?, ?, ?, ?)`;
+      values = [authorId, title, description, category, contactInfo];
+    }
+
+    const [result] = await pool.promise().query(query, values);
+
+    return res.status(201).json({
+      success: true,
+      message: "Ticket created successfully",
+      result,
+    });
   } catch (error) {
-    console.error(`error from raiseTicket Controller ${error}`);
+    console.error(`Error from createTicketController: ${error.message}`);
     return res.status(500).json({
       success: false,
-      message: `Error from Raise Ticket Controller ${error}`,
+      message: `Error from createTicketController: ${error.message}`,
     });
   }
 };
+
 export const getTicketsController = async (req, res) => {
   const authorId = req.user.id;
 
