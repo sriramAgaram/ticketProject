@@ -26,6 +26,11 @@ app.use("/api", ticketApi);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/dist/frontend/browser/index.html'));
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on Portt ${PORT}`);
 });
