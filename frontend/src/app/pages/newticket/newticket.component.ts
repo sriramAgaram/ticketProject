@@ -14,7 +14,6 @@ import { QuillEditorComponent } from '../../components/quill-editor/quill-editor
 })
 export class NewticketComponent {
   constructor(private fb: FormBuilder, private http: HttpClient) {}
-
   previewUrl: string | ArrayBuffer | null = null; // holds live preview when file is selected
   selectedImageFile: File | null = null; // store new image file
 
