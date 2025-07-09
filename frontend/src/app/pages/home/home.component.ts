@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
       'Fulfilled',
       'Closed',
     ];
+
     const statusMap = new Map(this.data.map((d) => [d.status, d.statusCount]));
 
     console.log(this.data.map((d) => [d.status, d.statusCount]));
@@ -100,7 +101,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.http.get(`${environment.apiUrl}/api/getticket`).subscribe({
       next: (data: any) => {
-        this.loading = true;
+        // this.loading = true;
         console.log(data);
         this.data = data.countAllSts;
 

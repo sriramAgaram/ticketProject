@@ -19,18 +19,30 @@ export class BarchartsComponent {
  
 
   barChartOptions: ChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom',
-         labels: {
+  responsive: true,
+  maintainAspectRatio: false, // << KEY TO MAKE HEIGHT WORK
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
           color: '#4B5563',
-          font: {
-            size: 14,
-          },
-        },
-      },
+      }
+    }
+  },
+  scales: {
+    x: {
+      ticks: {
+         color: '#4B5563',
+        maxRotation: 45,
+        minRotation: 45
+      }
     },
-  };
+    y: {
+      ticks: {
+        color: '#ccc',
+      },
+      beginAtZero: true
+    }
+  }
+};
 }

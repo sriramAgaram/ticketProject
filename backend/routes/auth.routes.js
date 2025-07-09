@@ -3,7 +3,7 @@ const {
   signupController,
   loginController,
   deleteUserController,
-  loggedUser,
+  // loggedUser,
   getAllUser,
 } = require("../controller/auth.controller");
 const { verifyToken } = require("../middleware/verifyRoute");
@@ -27,6 +27,6 @@ router.get("/profile", verifyToken, (req, res) => {
 
 
 
-router.get("/user", verifyToken, loggedUser);
+// router.get("/user", verifyToken, loggedUser);
 
 module.exports = router;

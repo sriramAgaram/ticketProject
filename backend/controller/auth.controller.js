@@ -116,20 +116,20 @@ export const deleteUserController = async (req, res) => {
   }
 };
 
-export const loggedUser = async (req, res) => {
-  const user = req.user;
+// export const loggedUser = async (req, res) => {
+//   const user = req.user;
 
-  const query = `SELECT * FROM auth WHERE id = ? `;
+//   const query = `SELECT * FROM auth WHERE id = ? `;
 
-  try {
-    const [result] = await pool.promise().query(query, [user.id]);
-    return res
-      .status(200)
-      .json({ success: true, message: `User Fecthed SuccessFully`, result });
-  } catch (error) {
-    return res.status(404).json({ success: false, message: "User Not Logged" });
-  }
-};
+//   try {
+//     const [result] = await pool.promise().query(query, [user.id]);
+//     return res
+//       .status(200)
+//       .json({ success: true, message: `User Fecthed SuccessFully`, result });
+//   } catch (error) {
+//     return res.status(404).json({ success: false, message: "User Not Logged" });
+//   }
+// };
 
 export const getAllUser = async (req, res) => {
   const query = `SELECT * FROM auth WHERE role = ?`;

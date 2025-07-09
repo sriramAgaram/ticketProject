@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {  Component} from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { DataService } from '../../data.service';
 import { CommonModule } from '@angular/common';
@@ -11,23 +11,24 @@ import { HomeComponent } from '../../pages/home/home.component';
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css',
 })
-export class NavComponent implements OnInit {
+export class NavComponent  {
   constructor(
     public dataService: DataService,
     private router: Router,
-    private cdf: ChangeDetectorRef
   ) {}
 
   isOpen = false;
-  sideBarIsOpen = true;
+  sideBarIsOpen = false;
   isLoggedIn: boolean = false;
 
   profileController() {
+    this.sideBarIsOpen  = false
     this.isOpen = !this.isOpen;
   }
 
   sidebarController() {
-    return (this.sideBarIsOpen = !this.sideBarIsOpen);
+    this.isOpen=false
+   this.sideBarIsOpen = !this.sideBarIsOpen
   }
 
   user = this.dataService.user;
@@ -36,20 +37,16 @@ export class NavComponent implements OnInit {
     this.dataService.logout();
     this.isOpen = false;
     this.router.navigate(['/login']);
+    this.sideBarIsOpen=false
   }
 
-  ngOnInit(): void {
-    // const user = this.dataService.islogged().subscribe({
-    //   next: (data: any) => {
-    //     const loggedUser = data.result;
-    //     this.user = loggedUser[0];
-    //     console.log(loggedUser);
-    //     this.dataService.setUser(this.user);
-    //     this.cdf.detectChanges();
-    //   },
-    //   error: (err) => {
-    //     console.error(err);
-    //   },
-    // });
+  navigate(path:string){
+    if (path) {
+    this.router.navigate([`/${path}`]);
+    this.sideBarIsOpen = false;
+    this.isOpen=false
   }
+  }
+
+ 
 }

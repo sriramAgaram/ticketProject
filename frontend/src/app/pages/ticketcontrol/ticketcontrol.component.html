@@ -3,9 +3,10 @@
   <app-spinner></app-spinner>
 }
 
+<div class="mt-12 ">
 
 <form [formGroup]="ticketUpdateForm" (ngSubmit)="onSubmit()"
-  class="max-w-3xl mx-auto mt-12 px-6 py-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-all duration-300">
+  class="max-w-xs sm:max-w-3xl mx-auto px-6 py-8 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl transition-all duration-300">
 
   <!-- Profile Info -->
   <div class="flex items-center gap-4 mb-10">
@@ -124,3 +125,4 @@
     </button>
   </div>
 </form>
+</div>

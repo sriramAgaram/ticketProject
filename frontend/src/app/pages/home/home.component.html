@@ -17,19 +17,30 @@
     </div>
 
     <!-- Charts Section -->
-    <div class="grid grid-cols-1 md:grid-cols-2  gap-6">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition hover:shadow-xl">
+    <div class="grid grid-cols-1 md:grid-cols-2   gap-6">
+      <div class="bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-lg transition hover:shadow-xl">
         <h2 class="text-lg font-semibold text-center text-gray-700 dark:text-white mb-4">
           Tickets by Status
         </h2>
-        <app-barcharts [chartData]="barchartData"></app-barcharts>
+
+        <div class="w-full h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px]">
+          <app-barcharts [chartData]="barchartData"></app-barcharts>
+        </div>
+
       </div>
+
 
       <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition hover:shadow-xl">
         <h2 class="text-lg font-semibold text-center text-gray-700 dark:text-white mb-4">
           Tickets by Priority
         </h2>
-        <app-piechart [pieData]="pieChartData"></app-piechart>
+        <div class="w-full h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px]">
+
+          <app-piechart [pieData]="pieChartData"></app-piechart>
+
+        </div>
+
+
       </div>
     </div>
 

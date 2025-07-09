@@ -134,6 +134,6 @@ export class TicketcontrolComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/alltickets']);
   }
 }

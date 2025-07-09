@@ -7,41 +7,22 @@
   <!-- Status Filter Dropdown -->
   <details class="group relative z-20">
     <summary
-      class="flex items-center gap-2 px-4 py-2 border border-gray-300 bg-white rounded-lg text-sm font-medium text-gray-700 cursor-pointer hover:text-gray-900 hover:border-gray-400 transition-all [&::-webkit-details-marker]:hidden"
-    >
+      class="flex items-center gap-2 px-4 py-2 border border-gray-300 bg-white rounded-lg text-sm font-medium text-gray-700 cursor-pointer hover:text-gray-900 hover:border-gray-400 transition-all [&::-webkit-details-marker]:hidden">
       <span>Status</span>
-      <svg
-        class="w-4 h-4 transition-transform group-open:rotate-180"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="1.5"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-        />
+      <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
       </svg>
     </summary>
 
     <!-- Dropdown Content -->
-    <div
-      class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg"
-    >
+    <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
       <fieldset class="p-3">
         <legend class="sr-only">Status Filter</legend>
         <div class="flex flex-col gap-2">
-          <label
-            *ngFor="let status of allStatuses"
-            class="inline-flex items-center gap-2"
-          >
-            <input
-              type="checkbox"
-              [value]="status"
-              (change)="onStatusChange($event)"
-              class="size-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-            />
+          <label *ngFor="let status of allStatuses" class="inline-flex items-center gap-2">
+            <input type="checkbox" [value]="status" (change)="onStatusChange($event)"
+              class="size-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
             <span class="text-sm text-gray-700 capitalize">{{ status }}</span>
           </label>
         </div>
@@ -50,11 +31,8 @@
   </details>
 
   <!-- + New Ticket Button -->
-  <a
-    *ngIf="user.role === 'user'"
-    routerLink="/newticket"
-    class="bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow"
-  >
+  <a *ngIf="user.role === 'user'" routerLink="/newticket"
+    class="bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow">
     + New Ticket
   </a>
 </div>
@@ -64,9 +42,8 @@
 </div> -->
 
 <div class="overflow-x-auto">
-  <table
-    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-  >
+  <table *ngIf="ticketList.length > 0; else noticket"
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead class="text-xs bg-blue-950 h-[80px] text-white uppercase">
       <tr>
         <th scope="col" class="px-6 py-3">Ticket</th>
@@ -90,19 +67,14 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="ticketList.length > 0; else noticket">
-        <tr
-          *ngFor="let t of ticketList"
-          (click)="goToTicket(t.id)"
-          class="bg-white dark:bg-gray-800 h-[80px] cursor-pointer"
-        >
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          >
+     
+        <tr *ngFor="let t of ticketList" (click)="goToTicket(t.id)"
+          class=" dark:bg-gray-800 h-[0px] sm:h-[60px] md:h-[80px]
+ cursor-pointer">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{ t.title }}
           </th>
-          <td class="px-6 py-4">
+          <td class="px-6 py-4 ">
             {{ t.id }}
           </td>
           <td *ngIf="user.role === 'admin'" class="px-6 py-4">
@@ -133,76 +105,45 @@
             {{ t.createdAt | date : "medium" }}
           </td>
         </tr>
-      </ng-container>
+  
     </tbody>
 
-    <ng-template #noticket>
-      <tr>
-        <td colspan="9" class="text-center py-10 text-lg text-gray-500">
-          No Ticket Found
-        </td>
-      </tr>
-    </ng-template>
+
   </table>
 
-  <ng-template #noticket>
-    <div class="text-2xl flex mt-16 justify-center items-center">
-      <p>No Ticket Found</p>
-    </div>
-  </ng-template>
-  <div class="flex flex-wrap justify-end p-3 bg-gray-800 gap-2">
-    <button
-      (click)="prevPage()"
-      [disabled]="page === 1"
-      class="rounded-md border border-slate-300 py-2 px-3 text-sm text-slate-600 bg-white hover:bg-slate-800 hover:text-white hover:border-slate-800 focus:outline-none focus:ring-2 transition-all disabled:pointer-events-none disabled:opacity-50"
-    >
-      <svg
-        width="1.5em"
-        height="1.5em"
-        stroke-width="1.5"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        color="currentColor"
-        class="mr-1.5 h-4 w-4 stroke-2"
-      >
-        <path
-          d="M15 6L9 12L15 18"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
+  @if(ticketList.length > 0){
+  <div  class="flex flex-wrap justify-end p-3 bg-gray-800 gap-2">
+    <button (click)="prevPage()" [disabled]="page === 1"
+      class="rounded-md border border-slate-300 py-2 px-3 text-sm text-slate-600 bg-white hover:bg-slate-800 hover:text-white hover:border-slate-800 focus:outline-none focus:ring-2 transition-all disabled:pointer-events-none disabled:opacity-50">
+      <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
+        xmlns="http://www.w3.org/2000/svg" color="currentColor" class="mr-1.5 h-4 w-4 stroke-2">
+        <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
       </svg>
     </button>
 
     <button
-      class="min-w-9 rounded-md bg-slate-800 text-white py-2 px-3 text-sm shadow hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 transition-all"
-    >
+      class="min-w-9 rounded-md bg-slate-800 text-white py-2 px-3 text-sm shadow hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 transition-all">
       {{ page }}
     </button>
 
-    <button
-      (click)="nextPage()"
-      [disabled]="ticketList.length < 10"
-      class="rounded-md border border-slate-300 py-2 px-3 text-sm text-slate-600 bg-white hover:bg-slate-800 hover:text-white hover:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-all disabled:pointer-events-none disabled:opacity-50"
-    >
-      <svg
-        width="1.5em"
-        height="1.5em"
-        stroke-width="1.5"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        color="currentColor"
-        class="ml-1.5 h-4 w-4 stroke-2"
-      >
-        <path
-          d="M9 6L15 12L9 18"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
+    <button (click)="nextPage()" [disabled]="ticketList.length < 10"
+      class="rounded-md border border-slate-300 py-2 px-3 text-sm text-slate-600 bg-white hover:bg-slate-800 hover:text-white hover:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 transition-all disabled:pointer-events-none disabled:opacity-50">
+      <svg width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
+        xmlns="http://www.w3.org/2000/svg" color="currentColor" class="ml-1.5 h-4 w-4 stroke-2">
+        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
       </svg>
     </button>
   </div>
+  }
+
+
+  <ng-template #noticket>
+    <div class="flex justify-center items-center h-84  md:h-96 lg:h-[30rem] xl:h-[35rem]">
+
+      <!-- <div class="text-2xl flex mt-16 justify-center items-center">
+      <p>No Ticket Found</p>
+    </div> -->
+      <img src="/assets/nodata.jpg" alt="No data" class="max-w-full max-h-full object-contain" />
+    </div>
+  </ng-template>
 </div>

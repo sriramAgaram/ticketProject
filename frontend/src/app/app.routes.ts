@@ -3,15 +3,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { authGuard } from './services/auth.guard';
+import { MyticketComponent } from './pages/myticket/myticket.component';
 
 
 export const routes: Routes = [
+  
   {
     path: '',
     component: HomeComponent,
     canActivate: [authGuard],
   },
-
   {
     path: 'alltickets',
     loadComponent:()=> import("./pages/myticket/myticket.component").then((m)=> m.MyticketComponent),
@@ -54,6 +55,12 @@ export const routes: Routes = [
   {
     path: 'ticket/:id/history',
     loadComponent:()=> import("./pages/history/history.component").then((m)=>m.HistoryComponent),
+    canActivate: [authGuard],
+  },
+
+  {
+    path: '**',
+    component: MyticketComponent,
     canActivate: [authGuard],
   },
 ];
